@@ -13,6 +13,7 @@ type Github struct {
 func New(
 	// The url for the github repo to fetch.
 	//
+	// +optional
 	url string,
 
 	// The branch of the Github repo to fetch.
