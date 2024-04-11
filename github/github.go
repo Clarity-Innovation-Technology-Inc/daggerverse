@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Clarity-Innovation-Technology-Inc/daggerverse/github/internal/dagger"
+	"dagger/github/internal/dagger"
 	"fmt"
 )
 

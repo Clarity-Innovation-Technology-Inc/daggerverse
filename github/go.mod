@@ -1,4 +1,4 @@
-module github.com/Clarity-Innovation-Technology-Inc/daggerverse/github
+module dagger/github
 
 go 1.21.7
 
