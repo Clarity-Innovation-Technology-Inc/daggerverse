@@ -5,35 +5,35 @@ import (
 	"fmt"
 )
 
-type Repo struct {
+type Github struct {
 	URL    string
 	Branch string
 }
 
-func New() *Repo {
-	return &Repo{}
+func New() *Github {
+	return &Github{}
 }
 
-func (r *Repo) WithUrl(url string) *Repo {
-	r.URL = url
-	return r
+func (g *Github) WithUrl(url string) *Github {
+	g.URL = url
+	return g
 }
 
-func (r *Repo) WithBranch(branch string) *Repo {
-	r.Branch = branch
-	return r
+func (g *Github) WithBranch(branch string) *Github {
+	g.Branch = branch
+	return g
 }
 
-func (r *Repo) Container(sshSocket *Socket) (*Container, error) {
+func (g *Github) Container(sshSocket *Socket) (*Container, error) {
 	repo := dag.Git(
-		r.URL,
+		g.URL,
 		dagger.GitOpts{
 			SSHAuthSocket: sshSocket,
 		}).
-		Branch(r.Branch).
+		Branch(g.Branch).
 		Tree()
 	if repo == nil {
-		return nil, fmt.Errorf("invalid Git repository or branch: %s/%s", r.URL, r.Branch)
+		return nil, fmt.Errorf("invalid Git repository or branch: %s/%s", g.URL, g.Branch)
 	}
 
 	cntr := dag.Container().
