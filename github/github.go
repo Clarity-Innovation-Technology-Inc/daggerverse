@@ -10,8 +10,21 @@ type Github struct {
 	Branch string
 }
 
-func New() *Github {
-	return &Github{}
+func New(
+	// The url for the github repo to fetch.
+	//
+	url string,
+
+	// The branch of the Github repo to fetch.
+	//
+	//+optional
+	//+default="main"
+	branch string,
+) *Github {
+	return &Github{
+		URL:    url,
+		Branch: branch,
+	}
 }
 
 func (g *Github) WithUrl(url string) *Github {
