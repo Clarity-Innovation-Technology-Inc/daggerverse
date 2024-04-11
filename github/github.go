@@ -10,7 +10,7 @@ type Github struct {
 	Branch string
 }
 
-func New() *Github {
+func (g *Github) New() *Github {
 	return &Github{}
 }
 
