@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"dagger/github/internal/dagger"
 	"fmt"
 )
@@ -8,6 +9,7 @@ import (
 type Github struct {
 	URL    string
 	Branch string
+	Cntr   *Container
 }
 
 func New(
@@ -54,5 +56,15 @@ func (g *Github) Container(sshSocket *Socket) (*Container, error) {
 		From("alpine:latest").
 		WithDirectory("/src", repo, dagger.ContainerWithDirectoryOpts{})
 
+	g.Cntr = cntr
+
 	return cntr, nil
+}
+
+func (g *Github) Entries(ctx context.Context) ([]string, error) {
+	entries, err := g.Cntr.Directory("/src").Entries(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return entries, nil
 }
