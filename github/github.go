@@ -2,21 +2,22 @@ package main
 
 import (
 	"context"
-	"dagger/github/internal/dagger"
-	"fmt"
+	// "dagger/github/internal/dagger"
+	// "fmt"
+	// "os"
 )
 
 type Github struct {
-	URL    string
+	Repo   *Directory
 	Branch string
 	Cntr   *Container
 }
 
 func New(
-	// The url for the github repo to fetch.
+	// The ssh url for the github repo to fetch.
 	//
 	// +optional
-	url string,
+	repo *Directory,
 
 	// The branch of the Github repo to fetch.
 	//
@@ -25,13 +26,13 @@ func New(
 	branch string,
 ) *Github {
 	return &Github{
-		URL:    url,
+		Repo:   repo,
 		Branch: branch,
 	}
 }
 
-func (g *Github) WithUrl(url string) *Github {
-	g.URL = url
+func (g *Github) WithRepo(repo *Directory) *Github {
+	g.Repo = repo
 	return g
 }
 
@@ -40,31 +41,14 @@ func (g *Github) WithBranch(branch string) *Github {
 	return g
 }
 
-func (g *Github) Container(sshSocket *Socket) (*Container, error) {
-	repo := dag.Git(
-		g.URL,
-		dagger.GitOpts{
-			SSHAuthSocket: sshSocket,
-		}).
-		Branch(g.Branch).
-		Tree()
-	if repo == nil {
-		return nil, fmt.Errorf("invalid Git repository or branch: %s/%s", g.URL, g.Branch)
-	}
-
+// When you have a Directory argument and you pass a git URL through the CLI,
+// it adds your ssh socket if you have SSH_AUTH_SOCK set
+func (g *Github) Container(ctx context.Context) (*Container, error) {
 	cntr := dag.Container().
 		From("alpine:latest").
-		WithDirectory("/src", repo, dagger.ContainerWithDirectoryOpts{})
+		WithDirectory("/src", g.Repo)
 
 	g.Cntr = cntr
 
 	return cntr, nil
-}
-
-func (g *Github) Entries(ctx context.Context) ([]string, error) {
-	entries, err := g.Cntr.Directory("/src").Entries(ctx)
-	if err != nil {
-		return nil, err
-	}
-	return entries, nil
 }
