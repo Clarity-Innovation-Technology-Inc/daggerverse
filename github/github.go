@@ -67,7 +67,7 @@ func (g *Github) WithBranch(branch string) (*Github, error) {
 	return g, nil
 }
 
-func (g *Github) Repo(path string, token *Secret) *Container {
+func (g *Github) Container(repoPath string, token *Secret) *Container {
 	repo := dag.Git(g.URL).
 		WithAuthToken(token).
 		Branch(g.Branch).
@@ -75,5 +75,5 @@ func (g *Github) Repo(path string, token *Secret) *Container {
 
 	return dag.Container().
 		From("alpine:latest").
-		WithDirectory(path, repo)
+		WithDirectory(repoPath, repo)
 }
