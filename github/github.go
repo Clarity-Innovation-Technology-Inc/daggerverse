@@ -67,7 +67,10 @@ func (g *Github) WithBranch(branch string) (*Github, error) {
 	return g, nil
 }
 
-func (g *Github) Container(repoPath string, token *Secret) *Container {
+// very opinionated regarding where repo is stored, if users are allowed to choose path opens potential for malicious input
+func (g *Github) Container(token *Secret) *Container {
+	var repoBasePath = "/home"
+
 	repo := dag.Git(g.URL).
 		WithAuthToken(token).
 		Branch(g.Branch).
@@ -75,5 +78,5 @@ func (g *Github) Container(repoPath string, token *Secret) *Container {
 
 	return dag.Container().
 		From("alpine:latest").
-		WithDirectory(repoPath, repo)
+		WithDirectory(repoBasePath, repo)
 }
