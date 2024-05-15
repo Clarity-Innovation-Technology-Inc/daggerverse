@@ -24,7 +24,7 @@ type CueFileEditor struct {
 }
 
 func New(
-	// The owner of the github org that stores the cue file you want to edit
+	// the owner of the github org that stores the cue file you want to edit
 	//
 	//+optional
 	githubOwner string,
@@ -49,28 +49,28 @@ func New(
 	//+optional
 	githubCommiterEmail string,
 
-	// The commit message that will be used when committing the cue file changes
+	// the commit message that will be used when committing the cue file changes
 	//
 	//+optional
 	githubCommitMsg string,
 
-	//	the subdirectory within the github repo that contains the cue file
+	// the subdirectory within the github repo that contains the cue file
 	//
 	//+optional
 	githubRepoPath string,
 
-	// The name of the cue config file you want to update
+	// the name of the cue config file you want to update
 	//
 	//+default="values.cue"
 	//+optional
 	cueFile string,
 
-	// A cue path (dot seperated) to a specific key within a cue configuration file
+	// a cue path (dot seperated) to a specific key within a cue configuration file
 	//
 	// //+optional
 	cuePath string,
 
-	// A concrete string value you want to use to your cue file
+	// a concrete string value you want to use to update your cue file
 	//
 	// //+optional
 	newStringVal string,
