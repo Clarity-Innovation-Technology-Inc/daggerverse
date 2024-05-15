@@ -87,7 +87,6 @@ func New(
 	}
 }
 
-
 func (c *CueFileEditor) WithGithubBranch(branch string) *CueFileEditor {
 	c.GithubBranch = branch
 	return c
@@ -126,7 +125,7 @@ func (c *CueFileEditor) Update(token *Secret) {
 	// finally editing the image tag to the desired tag
 	newCueVal, err := cue.UpdateValues(values, c.CuePath, c.NewStringValue)
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 
 	// writing the updated cue file back to disk
