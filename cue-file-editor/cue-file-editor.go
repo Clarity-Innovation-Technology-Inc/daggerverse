@@ -11,16 +11,16 @@ import (
 )
 
 type CueFileEditor struct {
-	GithubOwner         string
-	GithubRepo          string
-	GithubBranch        string
+	GithubOwner          string
+	GithubRepo           string
+	GithubBranch         string
 	GithubCommitterName  string
 	GithubCommitterEmail string
-	GithubCommitMessage string
-	GithubRepoPath      string
-	CueFileName         string
-	CuePath             string
-	NewStringValue      string
+	GithubCommitMessage  string
+	GithubRepoPath       string
+	CueFileName          string
+	CuePath              string
+	NewStringValue       string
 }
 
 func New(
@@ -48,14 +48,10 @@ func New(
 
 	// the commit message that will be used when committing the cue file changes
 	//
-	//+optional
-	//+default="update cue value"
-	githubCommitMsg string,
+	githubCommitMessage string,
 
 	// the subdirectory within the github repo that contains the cue file
 	//
-	//+optional
-	//+default=""
 	githubRepoPath string,
 
 	// the name of the cue config file you want to update
@@ -70,20 +66,20 @@ func New(
 
 	// a concrete string value you want to use to update your cue file
 	//
-	newStringVal string,
+	newStringValue string,
 
 ) *CueFileEditor {
 	return &CueFileEditor{
-		GithubOwner:         githubOwner,
-		GithubRepo:          githubRepo,
-		GithubBranch:        githubBranch,
+		GithubOwner:          githubOwner,
+		GithubRepo:           githubRepo,
+		GithubBranch:         githubBranch,
 		GithubCommitterName:  githubCommiterName,
 		GithubCommitterEmail: githubCommiterEmail,
-		GithubCommitMessage: githubCommitMsg,
-		GithubRepoPath:      githubRepoPath,
-		CueFileName:         cueFile,
-		CuePath:             cuePath,
-		NewStringValue:      newStringVal,
+		GithubCommitMessage:  githubCommitMessage,
+		GithubRepoPath:       githubRepoPath,
+		CueFileName:          cueFile,
+		CuePath:              cuePath,
+		NewStringValue:       newStringValue,
 	}
 }
 
@@ -91,15 +87,7 @@ func (c *CueFileEditor) WithGithubBranch(branch string) *CueFileEditor {
 	c.GithubBranch = branch
 	return c
 }
-func (c *CueFileEditor) WithGithubCommitMessage(msg string) *CueFileEditor {
-	c.GithubCommitMessage = msg
-	return c
-}
-func (c *CueFileEditor) WithGithubRepoPath(path string) *CueFileEditor {
-	c.GithubRepoPath = path
-	return c
-}
-func (c *CueFileEditor) WithCueFileName(filename string) *CueFileEditor {
+func (c *CueFileEditor) WithCueFile(filename string) *CueFileEditor {
 	c.CueFileName = filename
 	return c
 }
