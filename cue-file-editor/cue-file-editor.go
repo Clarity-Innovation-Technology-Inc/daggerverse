@@ -14,8 +14,8 @@ type CueFileEditor struct {
 	GithubOwner         string
 	GithubRepo          string
 	GithubBranch        string
-	GithubCommiterName  string
-	GithubCommiterEmail string
+	GithubCommitterName  string
+	GithubCommitterEmail string
 	GithubCommitMessage string
 	GithubRepoPath      string
 	CueFileName         string
@@ -77,8 +77,8 @@ func New(
 		GithubOwner:         githubOwner,
 		GithubRepo:          githubRepo,
 		GithubBranch:        githubBranch,
-		GithubCommiterName:  githubCommiterName,
-		GithubCommiterEmail: githubCommiterEmail,
+		GithubCommitterName:  githubCommiterName,
+		GithubCommitterEmail: githubCommiterEmail,
 		GithubCommitMessage: githubCommitMsg,
 		GithubRepoPath:      githubRepoPath,
 		CueFileName:         cueFile,
@@ -147,8 +147,8 @@ func (c *CueFileEditor) Update(token *Secret) {
 		c.GithubBranch,
 		c.GithubRepoPath,
 		[]string{c.CueFileName},
-		c.GithubCommiterName,
-		c.GithubCommiterEmail,
+		c.GithubCommitterName,
+		c.GithubCommitterEmail,
 		c.GithubCommitMessage,
 	)
 
