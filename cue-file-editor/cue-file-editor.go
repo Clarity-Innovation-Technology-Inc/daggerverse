@@ -26,53 +26,50 @@ type CueFileEditor struct {
 func New(
 	// the owner of the github org that stores the cue file you want to edit
 	//
-	//+optional
 	githubOwner string,
 
 	// the name of the repo that stores the cue file you want to edit
 	//
-	//+optional
 	githubRepo string,
 
 	// the branch of the repo that stores the cue file you want to edit
 	//
 	//+optional
+	//+default="main"
 	githubBranch string,
 
 	// the name of the github user that will commit the changes to your cue file
 	//
-	//+optional
 	githubCommiterName string,
 
 	// the email of the github user that will commit the changes to your cue file
 	//
-	//+optional
 	githubCommiterEmail string,
 
 	// the commit message that will be used when committing the cue file changes
 	//
 	//+optional
+	//+default="update cue value"
 	githubCommitMsg string,
 
 	// the subdirectory within the github repo that contains the cue file
 	//
 	//+optional
+	//+default=""
 	githubRepoPath string,
 
 	// the name of the cue config file you want to update
 	//
-	//+default="values.cue"
 	//+optional
+	//+default="values.cue"
 	cueFile string,
 
 	// a cue path (dot seperated) to a specific key within a cue configuration file
 	//
-	// //+optional
 	cuePath string,
 
 	// a concrete string value you want to use to update your cue file
 	//
-	// //+optional
 	newStringVal string,
 
 ) *CueFileEditor {
@@ -90,24 +87,9 @@ func New(
 	}
 }
 
-func (c *CueFileEditor) WithGithubOwner(owner string) *CueFileEditor {
-	c.GithubOwner = owner
-	return c
-}
-func (c *CueFileEditor) WithGithubRepo(repo string) *CueFileEditor {
-	c.GithubRepo = repo
-	return c
-}
+
 func (c *CueFileEditor) WithGithubBranch(branch string) *CueFileEditor {
 	c.GithubBranch = branch
-	return c
-}
-func (c *CueFileEditor) WithGithubCommiterName(name string) *CueFileEditor {
-	c.GithubCommiterName = name
-	return c
-}
-func (c *CueFileEditor) WithGithubCommiterEmail(email string) *CueFileEditor {
-	c.GithubCommiterEmail = email
 	return c
 }
 func (c *CueFileEditor) WithGithubCommitMessage(msg string) *CueFileEditor {
@@ -120,14 +102,6 @@ func (c *CueFileEditor) WithGithubRepoPath(path string) *CueFileEditor {
 }
 func (c *CueFileEditor) WithCueFileName(filename string) *CueFileEditor {
 	c.CueFileName = filename
-	return c
-}
-func (c *CueFileEditor) WithCuePath(path string) *CueFileEditor {
-	c.CuePath = path
-	return c
-}
-func (c *CueFileEditor) WithNewStringValue(val string) *CueFileEditor {
-	c.NewStringValue = val
 	return c
 }
 
